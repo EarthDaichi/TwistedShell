@@ -33,3 +33,20 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.processResources {
+
+    inputs.property("version", project.version)
+    inputs.property("group", project.group)
+
+    filesMatching("META-INF/build.properties") {
+        expand(
+            mapOf(
+                "name" to "TwistedShell",
+                "version" to project.version,
+                "group" to project.group,
+                "java" to JavaVersion.current().majorVersion
+            )
+        )
+    }
+}

@@ -1,0 +1,55 @@
+package com.twisted.shell.shell;
+
+import com.twisted.shell.builtin.HelpCommand;
+import com.twisted.shell.command.Command;
+import com.twisted.shell.command.CommandRegistry;
+import com.twisted.shell.parser.CommandParser;
+import com.twisted.shell.parser.ParsedCommand;
+import com.twisted.shell.terminal.ConsoleTerminal;
+import com.twisted.shell.terminal.Terminal;
+
+public class Shell {
+
+    private final CommandRegistry registry = new CommandRegistry();
+    private final ShellContext context;
+    private final CommandParser parser = new CommandParser();
+    private final Terminal terminal = new ConsoleTerminal();
+
+    public Shell() {
+
+        final Terminal terminal = new ConsoleTerminal();
+
+        context = new ShellContext(registry, terminal);
+
+        registry.register(new HelpCommand());
+
+    }
+
+    public void start() {
+
+        while (true) {
+
+            String line = terminal.readLine();
+
+            if (line.isBlank()) {
+                continue;
+            }
+
+            ParsedCommand parsed = parser.parse(line);
+
+            Command command = registry.find(parsed.command());
+
+            if (command == null) {
+
+                terminal.println("Unknown command.");
+
+                continue;
+            }
+
+            command.execute(context, parsed.arguments());
+
+        }
+
+    }
+
+}

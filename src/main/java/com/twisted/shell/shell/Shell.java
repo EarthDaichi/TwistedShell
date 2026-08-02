@@ -1,6 +1,7 @@
 package com.twisted.shell.shell;
 
 import com.twisted.shell.builtin.HelpCommand;
+import com.twisted.shell.builtin.ExitCommand;
 import com.twisted.shell.command.Command;
 import com.twisted.shell.command.CommandRegistry;
 import com.twisted.shell.parser.CommandParser;
@@ -22,6 +23,7 @@ public class Shell {
         context = new ShellContext(registry, terminal);
 
         registry.register(new HelpCommand());
+        registry.register(new ExitCommand());
 
     }
 

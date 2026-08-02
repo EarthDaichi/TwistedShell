@@ -14,7 +14,7 @@ public class CommandRegistry {
         commands.put(command.name(), command);
 
         for (String alias : command.aliases()) {
-            commands.put(alias, command)
+            commands.put(alias, command);
         }
     }
 

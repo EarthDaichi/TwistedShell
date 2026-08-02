@@ -1,9 +1,6 @@
 package com.twisted.shell.shell;
 
-import com.twisted.shell.builtin.HelpCommand;
-import com.twisted.shell.builtin.ExitCommand;
-import com.twisted.shell.builtin.VersionCommand;
-import com.twisted.shell.builtin.ClearCommand;
+import com.twisted.shell.builtin.*;
 
 import com.twisted.shell.command.Command;
 import com.twisted.shell.command.CommandContext;
@@ -30,6 +27,7 @@ public class Shell {
         registry.register(new ExitCommand());
         registry.register(new VersionCommand());
         registry.register(new ClearCommand());
+        registry.register(new EchoCommand());
 
     }
 

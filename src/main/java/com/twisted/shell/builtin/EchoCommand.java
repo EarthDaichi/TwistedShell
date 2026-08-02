@@ -15,7 +15,7 @@ public class EchoCommand implements Command {
 
     @Override
     public List<String> aliases() {
-        return List.of();
+        return List.of("print");
     }
 
     @Override

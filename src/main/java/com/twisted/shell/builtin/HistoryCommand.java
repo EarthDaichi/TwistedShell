@@ -3,15 +3,14 @@ package com.twisted.shell.builtin;
 import com.twisted.shell.command.Command;
 import com.twisted.shell.command.CommandCategory;
 import com.twisted.shell.command.CommandContext;
-import com.twisted.shell.util.ConsoleUtils;
 
 import java.util.List;
 
-public class ClearCommand implements Command {
+public class HistoryCommand implements Command {
 
     @Override
     public String name() {
-        return "clear";
+        return "history";
     }
 
     @Override
@@ -21,7 +20,7 @@ public class ClearCommand implements Command {
 
     @Override
     public String description() {
-        return "Clear the console";
+        return "Show command history";
     }
 
     @Override
@@ -31,11 +30,18 @@ public class ClearCommand implements Command {
 
     @Override
     public String usage() {
-        return "clear";
+        return "history";
     }
 
     @Override
     public void execute(CommandContext context) {
-        ConsoleUtils.clear();
+
+        List<String> history = context.shell().history().getAll();
+
+        for (int i = 0; i < history.size(); i++) {
+            System.out.println(
+                    (i + 1) + " " + history.get(i)
+            );
+        }
     }
 }

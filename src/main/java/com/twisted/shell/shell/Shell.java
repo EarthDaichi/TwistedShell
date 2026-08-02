@@ -28,6 +28,7 @@ public class Shell {
         registry.register(new VersionCommand());
         registry.register(new ClearCommand());
         registry.register(new EchoCommand());
+        registry.register(new HistoryCommand());
 
     }
 
@@ -60,6 +61,8 @@ public class Shell {
                     parsed.options(),
                     parsed.flags()
             );
+
+            context.history().add(line);
 
             command.execute(commandContext);
 

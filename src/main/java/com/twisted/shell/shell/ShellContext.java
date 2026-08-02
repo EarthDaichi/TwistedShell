@@ -2,15 +2,17 @@ package com.twisted.shell.shell;
 
 import com.twisted.shell.command.CommandRegistry;
 
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import com.twisted.shell.terminal.ConsoleTerminal;
+import com.twisted.shell.history.CommandHistory;
 import com.twisted.shell.terminal.Terminal;
 
 public class ShellContext {
 
     private final CommandRegistry registry;
     private final Terminal terminal;
+    private final CommandHistory history;
     private Path currentDirectory;
 
     public ShellContext(
@@ -19,8 +21,8 @@ public class ShellContext {
     ) {
 
         this.registry = registry;
-
         this.terminal = terminal;
+        this.history = new CommandHistory();
 
         this.currentDirectory = Paths.get("").toAbsolutePath();
 
@@ -40,6 +42,10 @@ public class ShellContext {
 
     public void currentDirectory(Path path) {
         this.currentDirectory = path;
+    }
+
+    public CommandHistory history() {
+        return history;
     }
 
 }

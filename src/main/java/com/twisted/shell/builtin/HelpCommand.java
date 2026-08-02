@@ -2,8 +2,20 @@ package com.twisted.shell.builtin;
 
 import com.twisted.shell.command.Command;
 import com.twisted.shell.shell.ShellContext;
+import java.util.List;
+import com.twisted.shell.command.CommandCategory;
 
 public class HelpCommand implements Command {
+
+    @Override
+    public List<String> aliases() {
+        return List.of("h");
+    }
+
+    @Override
+    public CommandCategory category() {
+        return CommandCategory.CORE;
+    }
 
     @Override
     public String name() {

@@ -1,6 +1,5 @@
 package com.twisted.shell.command;
 
-import com.twisted.shell.shell.ShellContext;
 import java.util.List;
 
 public interface Command {
@@ -13,8 +12,7 @@ public interface Command {
     CommandCategory category();
 
     void execute(
-            ShellContext context,
-            String[] args
+            CommandContext context
     );
 
 }

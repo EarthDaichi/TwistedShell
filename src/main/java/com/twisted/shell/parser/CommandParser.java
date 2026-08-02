@@ -1,5 +1,9 @@
 package com.twisted.shell.parser;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class CommandParser {
 
     public ParsedCommand parse(String input) {
@@ -14,7 +18,12 @@ public class CommandParser {
             System.arraycopy(split, 1, arguments, 0, arguments.length);
         }
 
-        return new ParsedCommand(command, arguments);
+        return new ParsedCommand(
+                command,
+                List.of(arguments),
+                Map.of(),
+                Set.of()
+        );
 
     }
 

@@ -2,7 +2,7 @@ package com.twisted.shell.builtin;
 
 import com.twisted.shell.command.Command;
 import com.twisted.shell.command.CommandCategory;
-import com.twisted.shell.shell.ShellContext;
+import com.twisted.shell.command.CommandContext;
 
 import java.util.List;
 
@@ -34,12 +34,9 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute(
-            ShellContext context,
-            String[] args
-    ) {
+    public void execute(CommandContext context) {
 
-        System.out.println("Goodbye!");
+        context.shell().terminal().println("Goodbye!");
 
         System.exit(0);
 

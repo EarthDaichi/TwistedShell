@@ -5,6 +5,7 @@ import com.twisted.shell.builtin.ExitCommand;
 import com.twisted.shell.builtin.VersionCommand;
 
 import com.twisted.shell.command.Command;
+import com.twisted.shell.command.CommandContext;
 import com.twisted.shell.command.CommandRegistry;
 import com.twisted.shell.parser.CommandParser;
 import com.twisted.shell.parser.ParsedCommand;
@@ -51,7 +52,16 @@ public class Shell {
                 continue;
             }
 
-            command.execute(context, parsed.arguments());
+            CommandContext commandContext = new CommandContext(
+                    context,
+                    line,
+                    parsed.command(),
+                    parsed.arguments(),
+                    parsed.options(),
+                    parsed.flags()
+            );
+
+            command.execute(commandContext);
 
         }
 

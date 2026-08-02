@@ -1,7 +1,7 @@
 package com.twisted.shell.builtin;
 
 import com.twisted.shell.command.Command;
-import com.twisted.shell.shell.ShellContext;
+import com.twisted.shell.command.CommandContext;
 import java.util.List;
 import com.twisted.shell.command.CommandCategory;
 
@@ -33,13 +33,13 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void execute(ShellContext context, String[] args) {
+    public void execute(CommandContext context) {
 
-        context.terminal().println("");
-        context.terminal().println("Available Commands");
-        context.terminal().println("------------------------------");
+        context.shell().terminal().println("");
+        context.shell().terminal().println("Available Commands");
+        context.shell().terminal().println("------------------------------");
 
-        for (Command command : context.registry().getCommands()) {
+        for (Command command : context.shell().registry().getCommands()) {
 
             System.out.printf(
                     "%-15s %s%n",

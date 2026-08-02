@@ -1,10 +1,16 @@
-package com.twisted.shell.parser;
+package com.twisted.shell.command;
+
+import com.twisted.shell.shell.ShellContext;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public record ParsedCommand(
+public record CommandContext(
+
+        ShellContext shell,
+
+        String rawInput,
 
         String command,
 

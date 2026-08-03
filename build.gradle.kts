@@ -50,3 +50,11 @@ tasks.processResources {
         )
     }
 }
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Main-Class" to "com.twisted.shell.Main"
+        )
+    }
+}

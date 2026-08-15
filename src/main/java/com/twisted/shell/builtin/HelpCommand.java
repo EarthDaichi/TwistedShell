@@ -9,7 +9,7 @@ public class HelpCommand implements Command {
 
     @Override
     public List<String> aliases() {
-        return List.of("h");
+        return List.of("h", "?");
     }
 
     @Override

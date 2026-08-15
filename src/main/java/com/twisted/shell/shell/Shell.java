@@ -1,6 +1,7 @@
 package com.twisted.shell.shell;
 
 import com.twisted.shell.builtin.*;
+import com.twisted.shell.builtin.commands.BadAppleCommand;
 
 import com.twisted.shell.command.Command;
 import com.twisted.shell.command.CommandContext;
@@ -29,6 +30,7 @@ public class Shell {
         registry.register(new ClearCommand());
         registry.register(new EchoCommand());
         registry.register(new HistoryCommand());
+        registry.register(new BadAppleCommand());
 
     }
 

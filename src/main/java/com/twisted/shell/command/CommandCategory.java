@@ -7,6 +7,7 @@ public enum CommandCategory {
     WORLDGEN,
     SERVER,
     PLUGIN,
-    UTIL
+    UTIL,
+    MEME
 
 }

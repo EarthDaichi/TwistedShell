@@ -31,6 +31,8 @@ public class Shell {
         registry.register(new EchoCommand());
         registry.register(new HistoryCommand());
         registry.register(new BadAppleCommand());
+        registry.register(new ColorCommand());
+        registry.register(new Playground());
 
     }
 

@@ -15,7 +15,7 @@ public class ExitCommand implements Command {
 
     @Override
     public List<String> aliases() {
-        return List.of("quit");
+        return List.of("quit","close","end");
     }
 
     @Override

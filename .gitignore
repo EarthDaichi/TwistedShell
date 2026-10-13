@@ -16,6 +16,8 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+src/main/resources/media/
+/src/main/resources/native/windows/ffmpeg.exe
 
 ### Eclipse ###
 .apt_generated

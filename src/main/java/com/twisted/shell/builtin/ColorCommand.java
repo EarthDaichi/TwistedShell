@@ -68,12 +68,23 @@ public class ColorCommand implements Command {
         );
 
         List<String> arguments = context.arguments();
+        if (arguments.isEmpty()) {
+            System.out.print("Usage: color <code|RESET>");
+            return;
+        }
         String code = arguments.getFirst().toUpperCase();
         if(code.equals("RESET")){
             System.out.print(RESET);
         }
-        else {
-            System.out.print(foregroundColors.get(code.charAt(0)) + backgroundColors.get(code.charAt(1)));
+        if (code.length() != 2) {
+            System.out.println("Invalid color code. Use two hexadecimal characters (0-F).");
+            return;
         }
+        if (!foregroundColors.containsKey(code.charAt(1))
+                || !backgroundColors.containsKey(code.charAt(0))) {
+            System.out.println("Invalid color code. Use characters 0-F.");
+            return;
+        }
+        System.out.print(foregroundColors.get(code.charAt(0)) + backgroundColors.get(code.charAt(1)));
     }
 }

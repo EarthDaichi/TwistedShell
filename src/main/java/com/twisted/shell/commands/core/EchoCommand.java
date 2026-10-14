@@ -35,6 +35,6 @@ public class EchoCommand implements Command {
 
     @Override
     public void execute(CommandContext context) {
-        System.out.println(String.join(" ", context.arguments()));
+        context.println(String.join(" ", context.arguments()));
     }
 }

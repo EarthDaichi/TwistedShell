@@ -13,7 +13,7 @@ public class CatCommand extends FileCommand{
 
     @Override
     public List<String> aliases() {
-        return List.of("nano");
+        return List.of();
     }
 
     @Override
@@ -28,10 +28,20 @@ public class CatCommand extends FileCommand{
 
     @Override
     protected void run(CommandContext context) throws java.io.IOException {
-        requireArgs(context, 1);
+        if (context.arguments().isEmpty() && context.hasStandardInput()) {
+            context.print(context.standardInput());
+            return;
+        }
 
-        Path path = context.shell().fileSystem().resolvePath(context.arguments().get(0));
+        if (context.arguments().isEmpty()) {
+            throw new IllegalArgumentException("Usage: cat <path>");
+        }
 
-        context.shell().terminal().println(context.shell().fileSystem().readText(path));
+        Path path = context.shell().fileSystem()
+                .resolvePath(context.arguments().get(0));
+
+        context.print(
+                context.shell().fileSystem().readText(path)
+        );
     }
 }

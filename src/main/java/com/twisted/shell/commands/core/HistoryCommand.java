@@ -39,9 +39,7 @@ public class HistoryCommand implements Command {
         List<String> history = context.shell().history().getAll();
 
         for (int i = 0; i < history.size(); i++) {
-            System.out.println(
-                    (i + 1) + " " + history.get(i)
-            );
+            context.shell().terminal().println((i + 1) + " " + history.get(i));
         }
     }
 }

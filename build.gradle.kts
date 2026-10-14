@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.twisted"
-version = "1.0.2"
+version = "1.0.3.2"
 
 repositories {
     mavenCentral()

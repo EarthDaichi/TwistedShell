@@ -4,12 +4,20 @@ package com.twisted.shell.terminal;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
+import java.io.BufferedWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 public class ConsoleTerminal implements Terminal, AutoCloseable {
 
     private final org.jline.terminal.Terminal jlineTerminal;
     private final LineReader lineReader;
+    private PrintWriter activeWriter;
 
     public ConsoleTerminal() {
         try {
@@ -20,7 +28,7 @@ public class ConsoleTerminal implements Terminal, AutoCloseable {
             lineReader = LineReaderBuilder.builder()
                     .terminal(jlineTerminal)
                     .build();
-
+            activeWriter = jlineTerminal.writer();
         } catch (java.io.IOException e) {
             throw new IllegalStateException(
                     "Cannot initialize JLine terminal.", e
@@ -41,16 +49,14 @@ public class ConsoleTerminal implements Terminal, AutoCloseable {
 
     @Override
     public void print(String text) {
-        PrintWriter writer = jlineTerminal.writer();
-        writer.print(text);
-        writer.flush();
+        activeWriter.print(text);
+        activeWriter.flush();
     }
 
     @Override
     public void println(String text) {
-        PrintWriter writer = jlineTerminal.writer();
-        writer.println(text);
-        writer.flush();
+        activeWriter.println(text);
+        activeWriter.flush();
     }
 
     public org.jline.terminal.Terminal jlineTerminal() {
@@ -60,5 +66,34 @@ public class ConsoleTerminal implements Terminal, AutoCloseable {
     @Override
     public void close() throws java.io.IOException {
         jlineTerminal.close();
+    }
+
+    public PrintWriter beginOutputRedirect(Path file, boolean append)
+            throws IOException {
+
+        PrintWriter previousWriter = activeWriter;
+
+        BufferedWriter writer = append
+                ? Files.newBufferedWriter(
+                file,
+                StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND
+        )
+                : Files.newBufferedWriter(
+                file,
+                StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING
+        );
+
+        activeWriter = new PrintWriter(writer);
+        return previousWriter;
+    }
+
+    public void endOutputRedirect(PrintWriter previousWriter) {
+        activeWriter.flush();
+        activeWriter.close();
+        activeWriter = previousWriter;
     }
 }

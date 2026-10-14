@@ -1,8 +1,8 @@
-package com.twisted.shell.builtin;
+package com.twisted.shell.commands.core;
 
-import com.twisted.shell.command.Command;
-import com.twisted.shell.command.CommandCategory;
-import com.twisted.shell.command.CommandContext;
+import com.twisted.shell.commandStructure.Command;
+import com.twisted.shell.commandStructure.CommandCategory;
+import com.twisted.shell.commandStructure.CommandContext;
 
 import java.util.List;
 import java.util.Map;
@@ -69,12 +69,12 @@ public class ColorCommand implements Command {
 
         List<String> arguments = context.arguments();
         if (arguments.isEmpty()) {
-            System.out.print("Usage: color <code|RESET>");
+            context.shell().terminal().println("Usage: color <code|RESET>");
             return;
         }
         String code = arguments.getFirst().toUpperCase();
         if(code.equals("RESET")){
-            System.out.print(RESET);
+            context.shell().terminal().println(RESET);
         }
         if (code.length() != 2) {
             context.shell().terminal().println("Invalid color code. Use two hexadecimal characters (0-F).");

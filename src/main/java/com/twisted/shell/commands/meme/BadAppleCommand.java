@@ -1,8 +1,8 @@
-package com.twisted.shell.builtin.commands;
+package com.twisted.shell.commands.meme;
 
-import com.twisted.shell.command.Command;
-import com.twisted.shell.command.CommandCategory;
-import com.twisted.shell.command.CommandContext;
+import com.twisted.shell.commandStructure.Command;
+import com.twisted.shell.commandStructure.CommandCategory;
+import com.twisted.shell.commandStructure.CommandContext;
 import org.jline.terminal.Attributes;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;

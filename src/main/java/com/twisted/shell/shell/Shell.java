@@ -1,11 +1,12 @@
 package com.twisted.shell.shell;
 
-import com.twisted.shell.builtin.*;
-import com.twisted.shell.builtin.commands.BadAppleCommand;
+import com.twisted.shell.commands.core.*;
+import com.twisted.shell.commands.meme.*;
+import com.twisted.shell.commands.filesystem.*;
 
-import com.twisted.shell.command.Command;
-import com.twisted.shell.command.CommandContext;
-import com.twisted.shell.command.CommandRegistry;
+import com.twisted.shell.commandStructure.Command;
+import com.twisted.shell.commandStructure.CommandContext;
+import com.twisted.shell.commandStructure.CommandRegistry;
 import com.twisted.shell.parser.CommandParser;
 import com.twisted.shell.parser.ParsedCommand;
 import com.twisted.shell.terminal.ConsoleTerminal;
@@ -19,9 +20,6 @@ public class Shell {
     private final Terminal terminal = new ConsoleTerminal();
 
     public Shell() {
-
-        final Terminal terminal = new ConsoleTerminal();
-
         context = new ShellContext(registry, terminal);
 
         registry.register(new HelpCommand());
@@ -32,8 +30,16 @@ public class Shell {
         registry.register(new HistoryCommand());
         registry.register(new BadAppleCommand());
         registry.register(new ColorCommand());
-        registry.register(new Playground());
-
+        registry.register(new LsCommand());
+        registry.register(new CdCommand());
+        registry.register(new PwdCommand());
+        registry.register(new MkdirCommand());
+        registry.register(new RmCommand());
+        registry.register(new CpCommand());
+        registry.register(new MvCommand());
+        registry.register(new CatCommand());
+        registry.register(new touchCommand());
+        registry.register(new NanoCommand());
     }
 
     public void start() {

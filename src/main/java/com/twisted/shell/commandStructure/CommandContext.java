@@ -1,4 +1,4 @@
-package com.twisted.shell.command;
+package com.twisted.shell.commandStructure;
 
 import com.twisted.shell.shell.ShellContext;
 

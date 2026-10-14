@@ -6,25 +6,66 @@ import java.util.Set;
 
 public class CommandParser {
 
+
     public ParsedCommand parse(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException("Command cannot be empty.");
+        }
 
-        String[] split = input.trim().split("\\s+");
+        List<String> tokens = new java.util.ArrayList<>();
+        StringBuilder token = new StringBuilder();
 
-        String command = split[0];
+        char quote = 0;
+        boolean tokenStarted = false;
 
-        String[] arguments = new String[Math.max(0, split.length - 1)];
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
 
-        if (split.length > 1) {
-            System.arraycopy(split, 1, arguments, 0, arguments.length);
+            if (quote != 0) {
+                if (c == quote) {
+                    quote = 0;
+                } else {
+                    token.append(c);
+                }
+                continue;
+            }
+
+            if (c == '"' || c == '\'') {
+                quote = c;
+                tokenStarted = true;
+            } else if (Character.isWhitespace(c)) {
+                if (tokenStarted) {
+                    tokens.add(token.toString());
+                    token.setLength(0);
+                    tokenStarted = false;
+                }
+            } else {
+                token.append(c);
+                tokenStarted = true;
+            }
+        }
+
+        if (quote != 0) {
+            throw new IllegalArgumentException(
+                    "Unclosed quotation mark."
+            );
+        }
+
+        if (tokenStarted) {
+            tokens.add(token.toString());
+        }
+
+        if (tokens.isEmpty()) {
+            throw new IllegalArgumentException("Command cannot be empty.");
         }
 
         return new ParsedCommand(
-                command,
-                List.of(arguments),
-                Map.of(),
-                Set.of()
+                tokens.get(0),
+                tokens.subList(1, tokens.size()),
+                java.util.Map.of(),
+                java.util.Set.of()
         );
-
     }
+
 
 }

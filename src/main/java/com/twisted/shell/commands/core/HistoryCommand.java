@@ -1,8 +1,8 @@
-package com.twisted.shell.builtin;
+package com.twisted.shell.commands.core;
 
-import com.twisted.shell.command.Command;
-import com.twisted.shell.command.CommandCategory;
-import com.twisted.shell.command.CommandContext;
+import com.twisted.shell.commandStructure.Command;
+import com.twisted.shell.commandStructure.CommandCategory;
+import com.twisted.shell.commandStructure.CommandContext;
 
 import java.util.List;
 

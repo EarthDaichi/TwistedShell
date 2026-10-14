@@ -1,4 +1,4 @@
-package com.twisted.shell.command;
+package com.twisted.shell.commandStructure;
 
 public enum CommandCategory {
 

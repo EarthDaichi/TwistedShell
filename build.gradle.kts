@@ -1,10 +1,11 @@
 plugins {
     id("java")
     id("application")
+    id("com.gradleup.shadow") version "9.2.2"
 }
 
 group = "com.twisted"
-version = "0.1.0"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -22,12 +23,6 @@ java {
 
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
-}
-
-dependencies {
-    testImplementation(platform("org.junit:junit-bom:6.0.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
@@ -64,6 +59,9 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:6.0.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.jline:jline-terminal:3.30.6")
+    implementation("org.jline:jline-native:3.30.6")
+    implementation("org.jline:jline:3.30.6")
 }
 
 tasks.register<Jar>("fatJar") {
